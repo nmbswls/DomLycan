@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DomLycan:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="DomLycan.war">
+      <element id="artifact" artifact-name="DomLycan:war exploded" />
+    </root>
+  </artifact>
+</component>
