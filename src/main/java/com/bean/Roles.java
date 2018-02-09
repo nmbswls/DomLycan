@@ -9,8 +9,15 @@ public class Roles {
     private Integer playerNumber;
     private String state1;
     private String state2;
+    private String token;
 
+    public String getToken() {
+        return token;
+    }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public Roles(){
 

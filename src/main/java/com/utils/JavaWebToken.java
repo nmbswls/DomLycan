@@ -62,11 +62,55 @@ public class JavaWebToken {
         try {
             Map<String, Object> jwtClaims =
                     Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(jwt).getBody();
+
             return jwtClaims;
         } catch (Exception e) {
             log.error("json web token verify failed");
             return null;
         }
+    }
+
+    public static Map<String, Object> parserJavaWebToken2(String jwt) {
+        try {
+            Map<String, Object> jwtClaims =
+                    Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(jwt).getBody();
+            if(!isTokenValid(jwtClaims)){
+                return null;
+            }
+            return jwtClaims;
+        } catch (Exception e) {
+            log.error("json web token verify failed");
+            return null;
+        }
+    }
+
+
+
+
+    public static boolean isTokenValid(Map<String,Object> claims){
+
+        Long exp = null;
+        Long nbf = null;
+        try{
+            exp = Long.parseLong(claims.get("exp").toString());
+            nbf = Long.parseLong(claims.get("nbf").toString());
+
+        }catch (Exception e){
+
+            return false;
+        }
+
+        Long now = System.currentTimeMillis()/1000;
+
+        if(now<nbf){
+            return false;
+
+        }
+        if(now>exp){
+            return false;
+
+        }
+        return true;
     }
 
 

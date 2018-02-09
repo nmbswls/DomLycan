@@ -14,6 +14,10 @@
     <input type="submit" value="进入">
 </form>
 
+${msg}<br>
+${request}
+
+
 
 </body>
 <script>

@@ -1,27 +1,55 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<%@page import="com.constant.MainConstant" %>
+
+
+<%
+    String[] godss = MainConstant.defaultGodNames;
+    request.setAttribute("defaultGodNames",godss);
+%>
+
+
+
+
 <html>
 <body>
+
+
+
+<br>
+<br>
 <h2>房间${roomId}</h2>
 
 
 <form action="createRoomOK?roomId=${roomId}" method="post" id="identities">
-    村民：<input type="number" name="village"}><br><br>
-    狼人：<input type="number" name="lycan"}><br><br>
+    村民：<input type="number" name="village" value="${villages}" }><br><br>
+    狼人：<input type="number" name="lycan" value="${lycans}" }><br><br>
     <table>
-        <tr>
-            <td><input type="checkbox" name="defaults" value="猎人" />猎人</td>
-            <td><input type="checkbox" name="defaults" value="预言家" />预言家</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" name="defaults" value="女巫" />女巫</td>
-            <td><input type="checkbox" name="defaults" value="白痴" />白痴</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" name="defaults" value="守卫" />守卫</td>
-            <td><input type="checkbox" name="defaults" value="白狼王" />白狼王</td>
-        </tr>
+        <c:forEach items="${defaultGodNames}" var="dGod" varStatus="st">
+        <c:if test="${st.index%2 == 0}">
+        <tr><td><input type="checkbox" name="defaults" value="${dGod}" id="god${dGod}"/>${dGod}<td>
+            </c:if>
+            <c:if test="${st.index%2 == 1}">
+            <td><input type="checkbox" name="defaults" value="${dGod}" id="god${dGod}"/>${dGod}<td><tr>
+        </c:if>
+
+        </c:forEach>
+
+
+
+        <%--<tr>--%>
+            <%--<td><input type="checkbox" name="defaults" value="猎人" id="god猎人"/>猎人</td>--%>
+            <%--<td><input type="checkbox" name="defaults" value="预言家" id="god预言家"/>预言家</td>--%>
+        <%--</tr>--%>
+        <%--<tr>--%>
+            <%--<td><input type="checkbox" name="defaults" value="女巫" id="god女巫"/>女巫</td>--%>
+            <%--<td><input type="checkbox" name="defaults" value="白痴" id="god白痴"/>白痴</td>--%>
+        <%--</tr>--%>
+        <%--<tr>--%>
+            <%--<td><input type="checkbox" name="defaults" value="守卫" id="god守卫"/>守卫</td>--%>
+            <%--<td><input type="checkbox" name="defaults" value="白狼王" id="god白狼王"/>白狼王</td>--%>
+        <%--</tr>--%>
         <tr>
             <td><div style="line-height: 3px" id = "customList">
 
@@ -45,13 +73,13 @@
 <script type="text/javascript">
 
     var i = 0;
-    function addInput() {
+    function addInput(value) {
         var tt = document.getElementById("customList");
 
         var o = document.createElement('input');
         o.type = 'text';
         o.name = 'customs';
-        o.value = '自定义角色' + i;
+        o.value = value||('自定义角色' + i);
         o.id = 'customName'+i;
         o.required = true;
         tt.appendChild(o);
@@ -75,6 +103,17 @@
         i = i+1;
 
     }
+
+    <c:forEach items="${gods}" var="god">
+
+        $("#god${god}").attr("checked",'checked');
+    </c:forEach>
+
+    <c:forEach items="${customs}" var="customName">
+
+        addInput("${customName}");
+    </c:forEach>
+
 
     function deleteCustom(var1) {
         document.getElementById("customName"+var1).remove();
