@@ -3,13 +3,12 @@
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2>房间${roomId}</h2>
 
 
-
-<form action="rngs" method="post" id="identities">
-    村民：<input type="number" name="village"><br><br>
-    狼人：<input type="number" name="lycan"><br><br>
+<form action="createRoomOK?roomId=${roomId}" method="post" id="identities">
+    村民：<input type="number" name="village"}><br><br>
+    狼人：<input type="number" name="lycan"}><br><br>
     <table>
         <tr>
             <td><input type="checkbox" name="defaults" value="猎人" />猎人</td>
@@ -24,14 +23,14 @@
             <td><input type="checkbox" name="defaults" value="白狼王" />白狼王</td>
         </tr>
         <tr>
-            <div style="line-height: 3px" id = "customList">
+            <td><div style="line-height: 3px" id = "customList">
 
             </div>
-
+            </td>
         </tr>
         <tr>
             <td><input type="button" onclick="addInput()" value="添加"></input> </td>
-            <td><input type="submit" value="确定"></td>
+            <td><input type="submit" value="确认"></td>
         </tr>
     </table>
 

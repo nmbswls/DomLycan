@@ -1,21 +1,26 @@
 package com.bean;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 @Component
 public class Roles {
-    private int roomId;
+    private Integer roomId;
     private String role;
-    private int playerAmount;
+    private Integer playerNumber;
     private String state1;
     private String state2;
 
-    public int getRoomId() {
+
+
+    public Roles(){
+
+    }
+
+    public Integer getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setRoomId(Integer roomId) {
         this.roomId = roomId;
     }
 
@@ -27,12 +32,12 @@ public class Roles {
         this.role = role;
     }
 
-    public int getPlayerAmount() {
-        return playerAmount;
+    public Integer getPlayerNumber() {
+        return playerNumber;
     }
 
-    public void setPlayerAmount(int playerAmount) {
-        this.playerAmount = playerAmount;
+    public void setPlayerNumber(Integer playerNumber) {
+        this.playerNumber = playerNumber;
     }
 
     public String getState1() {
@@ -48,6 +53,14 @@ public class Roles {
     }
 
     public void setState2(String state2) {
+        this.state2 = state2;
+    }
+
+    public Roles(Integer roomId, String role, Integer playerNumber, String state1, String state2) {
+        this.roomId = roomId;
+        this.role = role;
+        this.playerNumber = playerNumber;
+        this.state1 = state1;
         this.state2 = state2;
     }
 }
